@@ -1,0 +1,11 @@
+REST
+-----
+
+-Usuarios (users)
+-Listar | GET -> se van a una url (protocolo:// dominio. recursos. version) "http://api.com/users"
+-Mostrar| Get ->  http://api.com/user/:user_id
+-Crear | POST -> http://api.com/users
+Actualizar | PUT || PATCH -> http://api.com/user/:user_id
+Eliminar | Delete -> http://api.com/user/:user_id
+
+:user_id (los " : " para el parametro)
