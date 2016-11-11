@@ -18,7 +18,7 @@ $(document).ready(function(){
 		var specie = "";                     // creo string vacio
 		$.each(response.results, function(i, species){ // uso each para iterar entre los nombres de las especies
 			var value = "";
-			var soloId ="http://swapi.co/api/people/";
+			var soloId ="https://swapi.co/api/people/";
 			$.each(species.people, function(i, url){
 				value += url.replace(soloId, "");
 			});
@@ -34,7 +34,7 @@ $(document).ready(function(){
 $(".input-field").on("change", "#species", function(event){//(evento, a quien le detecta el evento, function)
 	var idNum = $(this).val().split("/");
 	for(var i=0; i<idNum.length; i++){
-		$.getJSON("http://swapi.co/api/people/"+ idNum[i] + "/", listarNombres);
+		$.getJSON("https://swapi.co/api/people/"+ idNum[i] + "/", listarNombres);
 	};
 
 });	
