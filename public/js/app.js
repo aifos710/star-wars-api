@@ -28,7 +28,7 @@ $(document).ready(function(){
 		$("#species").append(specie);//para ponerlo en html
 	};
 
-	$.getJSON("http://swapi.co/api/species/", listarEspecies);
+	$.getJSON("https://swapi.co/api/species/", listarEspecies);
 });
 
 $(".input-field").on("change", "#species", function(event){//(evento, a quien le detecta el evento, function)
@@ -42,4 +42,5 @@ $(".input-field").on("change", "#species", function(event){//(evento, a quien le
 	var listarNombres = function(response){
 		var templateCompleto = template.replace("{{name}}", response.name);
 		$("#people").append(templateCompleto);
+
 	}
