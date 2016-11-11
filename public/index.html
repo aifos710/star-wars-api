@@ -11,29 +11,14 @@
 <body class="bg">
 	<section class="container">
 		<h1 class="center-align white-text">SWAPI Client</h1>
-		<div>
-			<a id="next" class="btn-floating btn-large waves-effect waves-light amber right">
-				<i class="material-icons">skip_next</i>
-			</a>
-			<a id="pre" class="btn-floating btn-large waves-effect waves-light amber left">
-				<i class="material-icons">skip_previous</i>
-			</a>	
-			<h3 class="center-align white-text">Total: <span id="total" class="total">##</span></h3>
+		<div class="row">
+			<div class="input-field col s4 m4">
+				<select id="species">
+					<option data-url-species>__</option>
+				</select>
+			</div>
 		</div>
-		<div id="people" class="row">
-			<div class="col s12 m4">
-			    <div class="card horizontal">
-			      	<div class="card-stacked">
-			        	<div class="card-content  red accent-4 white-text">
-			          		<p>Hello, my name is <strong>___name___</strong></p>
-			        	</div>
-				        <div class="card-action">
-				          	<a class="moreAbout" data-show-url="{{ur}}">See more about me</a>
-				        </div>
-				    </div>
-		    	</div>
-	  		</div>    
-		</div>
+		<div id="people" class="row"></div>
 	</section>
 	<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>

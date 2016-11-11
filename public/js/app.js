@@ -1,3 +1,4 @@
+var templateSpecie = '<option value="__numId__" data-url-species="">__specie__</option>' // creo mi template
 var template = '<div class="col s12 m4">' +
 		    '<div class="card horizontal hoverable">' +
 		      	'<div class="card-stacked">' +
@@ -12,51 +13,33 @@ var template = '<div class="col s12 m4">' +
 	  	'</div>';
 
 $(document).ready(function(){
-
-	var pjs = function(response){
-		$("#total").text(response.results.length);
-		var personajes = "";
-		$.each(response.results, function(i, personaje){
-			personajes += template.replace("{{name}}",personaje.name).replace("{{url}}",
-				personaje.url);
+	
+	var listarEspecies = function(response){ //creo una function expresion
+		var specie = "";                     // creo string vacio
+		$.each(response.results, function(i, species){ // uso each para iterar entre los nombres de las especies
+			var value = "";
+			var soloId ="http://swapi.co/api/people/";
+			$.each(species.people, function(i, url){
+				value += url.replace(soloId, "");
+			});
+			specie += templateSpecie.replace("__specie__", species.name).replace("__numId__", value.substring(0,value.length-1)); // reemplazar el template html ^(__specie__) por species(parametro).name(propiedad en el api)
 		});
-		$("#people").html(personajes);
-		$("#next").attr("data-url", response.next);
-		$("#pre").attr("data-url-pre",response.previous);	
-
-		if(!response.next){
-			$("#next").fadeOut();
-		}
-		if(!response.previous){
-			$("#pre").fadeOut();
-		}
-		if(response.next && response.previous){
-			$("#next").fadeIn();
-			$("#pre").fadeIn();
-		}
+		$("#species").html('<option disabled selected >Species</option>');
+		$("#species").append(specie);//para ponerlo en html
 	};
 
-	
-	$.getJSON("http://swapi.co/api/people/", pjs)
-
-	$("#next").click(function(event){
-		event.preventDefault();
-		var url = $(this).attr("data-url");
-		$.getJSON(url, pjs);
-	});
-
-	$("#pre").click(function(event){
-		event.preventDefault();
-		var url = $(this).attr("data-url-pre");//nombre unico
-		$.getJSON(url, pjs);
-	});
-
-	$("#people").on("click", ".moreAbout", function(event){
-		event.preventDefault();
-		alert("hola");
-	});
-	$("#species").change(function(e){
-		alerts($(this).val());
-	})
-
+	$.getJSON("http://swapi.co/api/species/", listarEspecies);
 });
+
+$(".input-field").on("change", "#species", function(event){//(evento, a quien le detecta el evento, function)
+	var idNum = $(this).val().split("/");
+	for(var i=0; i<idNum.length; i++){
+		$.getJSON("http://swapi.co/api/people/"+ idNum[i] + "/", listarNombres);
+	};
+
+});	
+
+	var listarNombres = function(response){
+		var templateCompleto = template.replace("{{name}}", response.name);
+		$("#people").append(templateCompleto);
+	}
