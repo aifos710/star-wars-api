@@ -33,9 +33,11 @@ $(document).ready(function(){
 
 $(".input-field").on("change", "#species", function(event){//(evento, a quien le detecta el evento, function)
 	var idNum = $(this).val().split("/");
+	$("#people").html("");
 	for(var i=0; i<idNum.length; i++){
 		$.getJSON("https://swapi.co/api/people/"+ idNum[i] + "/", listarNombres);
 	};
+
 
 });	
 
